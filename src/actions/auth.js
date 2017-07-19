@@ -34,7 +34,7 @@ export function executeLogin(username, password, nextUrl) {
 
 function _getAuthToken(response, dispatch, nextUrl){
   try{
-    const token = response.headers.get('x-auth-token');
+    const token = response.headers.get('x-auth-token');    
     dispatch(loginUserSuccess(token));
     dispatch(push(nextUrl));
   }catch(e){

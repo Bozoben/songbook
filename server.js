@@ -4,7 +4,14 @@ var express = require('express');
 var app = express();
 var query = require('pg-query');
 var when = require('when');
-query.connectionParameters='postgres://benoitvilletard@localhost:5432/songbook';
+import mockups from 'express-mockups-middleware';
+import mockupsdata from './mockups/mockups';
+const resources = ['Resource1','Resource2'];
+var request = require('request');
+var cheerio = require('cheerio');
+var rp = require('request-promise');
+var iconv = require('iconv-lite');
+//query.connectionParameters='postgres://benoitvilletard@localhost:5432/songbook';
 
 
 
@@ -20,6 +27,8 @@ if(process.env.NODE_ENV !== 'production') {
 
   app.use(webpackDevMiddleware(compiler, { noInfo: true, publicPath: config.output.publicPath }));
   app.use(webpackHotMiddleware(compiler));
+
+  app.use(mockups(mockupsdata));
 }
 
 app.use(express.static(path.join(__dirname, 'dist')));
@@ -50,6 +59,40 @@ app.get("/api/songs", function(req, res) {
     });
     return res.json(songs);
   });
+});
+
+app.get('/scrape/:artist', function(req, res){
+  var artist = req.params.artist;
+  artist = artist.replace(' ','-');
+  console.log("Retrieving songs for ", artist);
+  var options = {
+      uri: 'http://www.boiteachansons.net/Artistes/' + artist + '.php',
+      transform: function (body) {
+          return cheerio.load(body);
+      }
+  };
+
+  rp(options)
+      .then(function ($) {
+          var json = [];
+          // Process html like you would with jQuery...
+          $('.aLiensChansons').filter(function(){
+              var data = $(this);
+              var titre = data.find('.sLstPart_TitreChanson').text();
+              var ic = iconv.decode(titre,'ISO-8859-15');
+              var buf = iconv.encode(ic,'utf-8');
+              console.log(buf.toString('utf-8'));
+              var href = data.attr('href').replace('Partitions','Txt').replace('\.php','\.txt').replace('../','');
+              href = 'http://www.boiteachansons.net/' + href;
+              json.push({"title": titre,"href": href});
+          })
+          return res.send(JSON.stringify(json));
+      })
+      .catch(function (err) {
+          // Crawling failed or Cheerio choked...
+          console.log(err);
+          return res.sendStatus(500,"Aie aie aie");
+      });
 
 
 });

@@ -25,7 +25,7 @@ class VueSongs extends React.Component {
   render() {
     return (
       <div>
-      <h4>Liste des chansons</h4>
+      <h4>Books list</h4>
       <ul>
       {this.props.songs.map(function(item,idx){
       return (
