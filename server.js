@@ -11,6 +11,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 var rp = require('request-promise');
 var iconv = require('iconv-lite');
+var _ = require('lodash');
 //query.connectionParameters='postgres://benoitvilletard@localhost:5432/songbook';
 
 
@@ -63,7 +64,7 @@ app.get("/api/songs", function(req, res) {
 
 app.get('/scrape/:artist', function(req, res){
   var artist = req.params.artist;
-  artist = artist.replace(' ','-');
+  artist = _.startCase(artist).replace(' ','-');
   console.log("Retrieving songs for ", artist);
   var options = {
       uri: 'http://www.boiteachansons.net/Artistes/' + artist + '.php',
