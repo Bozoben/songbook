@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import {songs} from './reducers/songs-reducer';
 import { routerReducer } from 'react-router-redux';
 import {auth} from './reducers/auth';
+import {loginUserSuccess} from './actions/auth';
 import {fetchSongs} from './reducers/songs-actions';
 import { routerMiddleware, syncHistoryWithStore } from 'react-router-redux';
 // Login
@@ -31,16 +32,20 @@ const store = createStore(reducers, composeEnhancers(
   applyMiddleware(thunkMiddleware,
   routerMiddleware(hashHistory))
 ));
+const token = sessionStorage.getItem('token');
+// Il peut arriver que le token soit stocké en tant que string "undefined" et là c'est le drame, d'où test
+if (token && token !== "undefined") {
+  store.dispatch(loginUserSuccess(token))
+}
 
-// Init matieres
+// Init donnees
 store.dispatch(fetchSongs());
-const history = syncHistoryWithStore(hashHistory, store);
 
-render(<Provider store={store}><Router history={history}>
+render(<Provider store={store}><Router history={syncHistoryWithStore(hashHistory, store)}>
   <Route path="/" component={App}>
     <IndexRedirect to='/songs'/>
     <Route path="/songs" component={requireAuthentication(VueSongs)}/>
-    <Route path='/songs/:id' component={DetailSong}/>
+    <Route path='/songs/:id' component={requireAuthentication(DetailSong)}/>
     <Route path="/login" component={LoginView} />
   </Route>
 </Router></Provider>, document.getElementById('root'));

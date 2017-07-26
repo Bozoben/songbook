@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     selectSong: (item) => {
       dispatch(selectSong(item.id));
-      hashHistory.push('/song/' + item.id);
+      hashHistory.push('/songs/' + item.id);
     }
 
   };

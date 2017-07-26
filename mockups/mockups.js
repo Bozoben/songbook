@@ -14,13 +14,13 @@ const data = [
     "status": 200
   },
   {
-    pattern: '/songs/(.*)',
+    pattern: '/api/songs/(.*)',
     body: (req) => {
       return songs[0]
     }
-  },  
+  },
   {
-    pattern: '/songs',
+    pattern: '/api/songs',
     body: (req) => {
       return songs
     }

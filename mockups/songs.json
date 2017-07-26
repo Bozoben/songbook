@@ -1,7 +1,8 @@
 [
-  {"id":1,
+  {"id":0,
   "title":"Au bois de mon coeur",
   "artist":"Brassens, Georges",
+  "format":"text",
   "content":[
     "Intro`: Am   Am   D   D#(dim)   E   D   C   E ",
     "",
@@ -59,8 +60,18 @@
      "des petites fleurs...",
      "E      D               C ",
      "Au, au bois d'mon coeur...",
-"            G           F      G    A ",
-"     Au, au bois d'mon coeur...    "
+     "       G           F      G    A ",
+     "Au, au bois d'mon coeur...    "
   ]
-  }
+},
+{"id":1,
+"title":"Un autre monde",
+"artist":"Téléphone",
+"format":"chordpro",
+"content":[
+  "[Am]une [Bm]ligne",
+  "[C]other ligne",
+  "et encore [Em]une autre"
+]
+}
 ]
