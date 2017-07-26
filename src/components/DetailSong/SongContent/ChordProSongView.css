@@ -1,14 +1,21 @@
-div.chord {
-  display: inline;
-  position: relative;
-  top : -14px;
-  left: 14px;
+div.partition {
+  font-family: monospace;
+  font-size:medium;
 }
 
-div.textToken {
-  display:inline;
+div.lineMedium {
+  line-height:2.1em;
+}
+div.lineSimple {
+  line-height:1.4em;
 }
 
-div.lineWithChords {
-  line-height:32px;
+span.chord {
+    display: inline-block;
+    position: relative;
+    top: -1.1em;
+    width: 0;
+    /*right: 10px;*/
+    word-break: keep-all;
+    white-space: nowrap;
 }

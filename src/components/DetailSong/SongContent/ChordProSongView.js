@@ -1,29 +1,34 @@
 const e = React.createElement;
 
 function superLine(item) {
-  // on decompose la ligne en n tokens (soit du texte, soit un accord)
-  var tokens = [];
-  var newItem = item;
+  // on identifie les accords dans la ligne
   var regExp = /\[([^\]]+)\]/g ;
   var accords = item.match(regExp);
+
+  // Si pas d'accord ligne simple
   if (accords == null) {
-    tokens.push(item);
+    return (e("div",{className:"lineSimple"},item));
   } else {
+    // Sinon on décompose
+    var tokens = [];
+    var newItem = item; // Ligne initiale
     accords.forEach(function(accord) {
       var idx = newItem.indexOf(accord);
       const accordBrut = accord.replace('[','').replace(']','');
+      // On reprend le texte avant l'accord
       if (idx > 0)
-        tokens.push(e("div",{className:"textToken"},newItem.substr(0,idx)));
-      tokens.push(e("div",{className:"chord"}, accordBrut));
+        tokens.push(newItem.substr(0,idx));
+      // Puis un span pour l'accord
+      tokens.push(e("span",{className:"chord"}, " " + accordBrut));
+      // On ne garde que le reste de la ligne à traiter
       newItem = newItem.substr(idx + accord.length);
-      console.log("New item",newItem);
     });
+    // S'il y a encore du texte (après le dernier accord trouvé), on l'ajoute
     if (newItem.length > 0)
-      tokens.push(e("div",{className:"textToken"},newItem));
-  }
+      tokens.push(newItem);
 
-  //var allTokens = e("div",null,tokens);
-  return (e("div",{className:"lineWithChords"},tokens));
+    return (e("div",{className:"lineMedium"},tokens));
+  }
 }
 
 import "./ChordProSongView.css";
@@ -31,7 +36,7 @@ import "./ChordProSongView.css";
 class ChordProSongView extends React.Component {
   render() {
     return(
-      <div><br/>
+      <div className="partition"><br/>
       {this.props.content.map(function(item,idx){
       return (
         superLine(item)
