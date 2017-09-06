@@ -15,6 +15,14 @@ export function songs(state = initialState, action) {
       return {...state, songs: newData};
     case SELECT_SONG:
       return {...state, currentId: action.id, currentData : state.songs[action.id]};
+    case UPDATE_SONG:
+
+      var song = action.item;
+      console.log("un",song, state.currentData);
+      var newSongs = state.songs;
+      newSongs[song.id] = song;
+      console.log("deux");
+      return {...state, songs: newSongs, currentId: song.id, currentData : newSongs[song.id]};
     default:
     return state;
   }

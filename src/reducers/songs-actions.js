@@ -20,10 +20,10 @@ export function addSong(item) {
 export function selectSong(id) {
   return {type: SELECT_SONG, id};
 }
-export function updateSONG(item) {
+export function updateSong(item) {
   return {type: UPDATE_SONG, item};
 }
-export function deleteSONG(item) {
+export function deleteSong(item) {
   return {type: DELETE_SONG, item};
 }
 

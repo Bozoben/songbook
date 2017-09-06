@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-//import {addSequence, updateSeance, deleteSequence, fetchMatieres} from '../../reducers/matieres-actions';
+import {updateSong} from '../../reducers/songs-actions';
 import DetailSong from './DetailSong';
 
 const mapStateToProps = (state) => {
@@ -10,6 +10,9 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateSong: (data) => {
+      dispatch(updateSong(data));
+    }
 /*     dispatch(addSequence(data));
     },
     updateSeance: (data) => {
