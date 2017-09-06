@@ -15,11 +15,7 @@ class DetailSong extends React.Component {
     this.state={edit: false};
   }
 
-  onUpdate(data) {
-    var song = this.props.song;
-    // On update juste le contenu (pas le titre etc)
-    // Au passage conversion contenu de la saisie en tableau de string.
-    song.content = data.split("\n");
+  onUpdate(song) {
     this.props.updateSong(song);
     this.toggleEdit();
   }
@@ -37,13 +33,10 @@ class DetailSong extends React.Component {
     if (song)
     return (
       <div class="detailSong">
-      <Panel header={song.title} bsStyle="warning">
-      <i>{song.artist}</i>
-        <SongEdit showModal={this.state.edit} onClose={this.toggleEdit} content={song.content} onUpdate={this.onUpdate}/>
+        <Button onClick={this.goBack} bsStyle="success" bsSize="small"><Glyphicon glyph="arrow-left"/> Retour</Button><br/>
+        {song.title} - <i>{song.artist}</i> <Button onClick={this.toggleEdit} bsStyle="primary" bsSize="xsmall"> Editer</Button>
+        <SongEdit showModal={this.state.edit} onClose={this.toggleEdit} song={song} onUpdate={this.onUpdate}/>
         <SongContent song={song}/>
-      </Panel>
-
-      <Button onClick={this.toggleEdit} bsStyle="primary" bsSize="small">Editer</Button><Button onClick={this.goBack} bsStyle="success" bsSize="small"><Glyphicon glyph="arrow-left"/> Retour</Button><br/>
       </div>
     );
     else

@@ -10,18 +10,18 @@ const initialState = {
 export function songs(state = initialState, action) {
   switch (action.type) {
     case LOAD_SONGS:
-      //return Object.assign({},state, {songs: action.data});
       var newData = Object.assign({},action.data);
       return {...state, songs: newData};
     case SELECT_SONG:
       return {...state, currentId: action.id, currentData : state.songs[action.id]};
+    case ADD_SONG:
+      //FIXME : debouchonner
+      return state;
     case UPDATE_SONG:
-
+      // FIXME : debouchonner
       var song = action.item;
-      console.log("un",song, state.currentData);
       var newSongs = state.songs;
       newSongs[song.id] = song;
-      console.log("deux");
       return {...state, songs: newSongs, currentId: song.id, currentData : newSongs[song.id]};
     default:
     return state;
