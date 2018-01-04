@@ -1,0 +1,4 @@
+div.grilleLine {
+  display: flex;
+  flex-direction: row;
+}
