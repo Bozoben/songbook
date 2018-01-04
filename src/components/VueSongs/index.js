@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 import { selectSong} from '../../reducers/songs-actions';
 import VueSongs from './VueSongs';
 
@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     selectSong: (item) => {
       dispatch(selectSong(item.id));
-      hashHistory.push('/songs/' + item.id);
+      browserHistory.push('/songs/' + item.id);
     }
 
   };

@@ -4,7 +4,7 @@ class TextSongView extends React.Component {
       <pre>
       {this.props.content.map(function(item,idx){
       return (
-        <p>{item}</p>
+        <p key={idx}>{item}</p>
       )})}
       </pre>
     )
@@ -12,7 +12,7 @@ class TextSongView extends React.Component {
 }
 
 TextSongView.propTypes = {
-  content : React.PropTypes.object,
+  content : React.PropTypes.array,
 }
 
 

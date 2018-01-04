@@ -1,0 +1,16 @@
+div.grilleItem {
+  border: solid black 1px;
+  background-color: #FFFFFF;
+  font-size:1.2em;
+  font-family: Verdana;
+  width:80px;
+  height: 40px;
+  text-align: center;
+  vertical-align: center;
+}
+
+div.grilleItem input {
+  width:60px;
+  vertical-align:center;
+  font-size:1em;
+}
