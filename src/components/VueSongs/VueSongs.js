@@ -2,14 +2,6 @@ import {Table, ProgressBar, Glyphicon} from "react-bootstrap";
 import {Link} from 'react-router';
 
 
-function FlagDevoir({ seanceAVenir }) {
-  if (seanceAVenir.indexOf('Devoir') > 0) {
-    return (<Glyphicon glyph="hand-right" htmlStyle="color:blue"/>);
-  } else {
-    return null;
-  }
-}
-
 class VueSongs extends React.Component {
   constructor(props) {
     super(props);
@@ -26,15 +18,24 @@ class VueSongs extends React.Component {
     return (
       <div>
       <h4>Songs list</h4>
-      <ul>
-      {this.props.songs.map(function(item,idx){
-      return (
-        <li key={idx}><a href="#" onClick={(event) => this.selectSong(event,item)}>{item.title}</a>
-
-        </li>
-      )}
-    .bind(this))}
-      </ul>
+      <Table striped bordered condensed hover>
+  <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Auteur</th>
+    </tr>
+  </thead>
+  <tbody>
+  {this.props.songs.map(function(item,idx){
+  return (
+    <tr key={idx}>
+      <td><a href="#" onClick={(event) => this.selectSong(event,item)}>{item.title}</a></td>
+      <td>{item.artist}</td>
+    </tr>
+  )}
+.bind(this))}
+  </tbody>
+</Table>
       </div>
     );
   }

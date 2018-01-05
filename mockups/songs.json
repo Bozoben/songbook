@@ -3,6 +3,11 @@
   "title":"Au bois de mon coeur",
   "artist":"Brassens, Georges",
   "format":"text",
+  "grid" : [
+    {"title":"Intro", "mesures":["Am", "D D#dim","E D","C E"]},
+    {"title":"Couplet", "mesures":["Am C6","D D#dim","E D","C E","Am D#","Am D","C E","F7 Am7"]},
+    {"title":"Refrain", "mesures":["Dm","- G7","C","A7","Dm","Am D#dim E7"]}
+  ],
   "content":[
     "Intro`: Am   Am   D   D#(dim)   E   D   C   E ",
     "",

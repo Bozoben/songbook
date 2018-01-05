@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute, browserHistory } from 'react-router';
+import { Router, Route, IndexRoute, IndexRedirect, browserHistory } from 'react-router';
 /* Redux stuff */
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
@@ -29,8 +29,8 @@ const reducers = combineReducers({
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(reducers, composeEnhancers(
-  applyMiddleware(thunkMiddleware/*,
-  routerMiddleware(browserHistory)*/)
+  applyMiddleware(thunkMiddleware,
+  routerMiddleware(browserHistory))
 ));
 const token = sessionStorage.getItem('token');
 // Il peut arriver que le token soit stocké en tant que string "undefined" et là c'est le drame, d'où test
@@ -43,7 +43,7 @@ store.dispatch(fetchSongs());
 
 render(<Provider store={store}><Router history={browserHistory}>
   <Route path="/" component={App}>
-    <IndexRoute component={requireAuthentication(VueSongs)}/>
+    <IndexRedirect to='/songs'/>
     <Route path="/songs" component={requireAuthentication(VueSongs)}/>
     <Route path='/songs/:id' component={requireAuthentication(DetailSong)}/>
     <Route path="/login" component={LoginView} />

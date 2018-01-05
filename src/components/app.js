@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav,Navbar, NavItem} from 'react-bootstrap/lib';
+import {Glyphicon, Nav,Navbar, NavItem} from 'react-bootstrap/lib';
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -9,10 +9,10 @@ export default class App extends React.Component {
   render() {
     return (
       <div className="app">
-        <Navbar >
+        <Navbar inverse>
             <Navbar.Header>
                 <Navbar.Brand>
-                    SongBook
+                <a href="/">My Smart SongBook</a>{' '}<Glyphicon glyph="music"/>
                 </Navbar.Brand>
             </Navbar.Header>
         </Navbar>

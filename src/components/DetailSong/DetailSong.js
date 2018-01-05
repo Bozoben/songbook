@@ -31,14 +31,18 @@ class DetailSong extends React.Component {
 
   render() {
     var song = this.props.song;
+    console.log("Song",song);
     if (song)
     return (
       <div className="detailSong">
-        <Button onClick={this.goBack} bsStyle="success" bsSize="small"><Glyphicon glyph="arrow-left"/> Retour</Button><br/>
-        {song.title} - <i>{song.artist}</i> <Button onClick={this.toggleEdit} bsStyle="primary" bsSize="xsmall"> Editer</Button>
-        <GrilleEdit/>
+        <h2>{song.title} - <i>{song.artist}</i></h2>
+        <GrilleEdit grid={song.grid}/>
+        <div><legend>Paroles{' '}
+        <Button onClick={this.toggleEdit} bsStyle="primary" bsSize="small"> Editer</Button>
+        </legend>
         <SongEdit showModal={this.state.edit} onClose={this.toggleEdit} song={song} onUpdate={this.onUpdate}/>
         <SongContent song={song}/>
+        </div>
       </div>
     );
     else

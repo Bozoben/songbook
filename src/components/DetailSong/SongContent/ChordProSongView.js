@@ -36,7 +36,7 @@ import "./ChordProSongView.css";
 class ChordProSongView extends React.Component {
   render() {
     return(
-      <div className="partition"><br/>
+      <div className="partition">
       {this.props.content.map(function(item,idx){
       return (
         superLine(item)

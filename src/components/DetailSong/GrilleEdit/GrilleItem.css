@@ -3,14 +3,14 @@ div.grilleItem {
   background-color: #FFFFFF;
   font-size:1em;
   font-family: Verdana;
-  width:80px;
+  width:100px;
   height: 50px;
   text-align: center;
   vertical-align: center;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  xjustify-content: space-around;
 }
 
 div.grilleItem input {
@@ -21,6 +21,6 @@ div.grilleItem input {
 }
 
 div.grilleItemChord {
-  width:40%;
+  width:48%;
 
 }
